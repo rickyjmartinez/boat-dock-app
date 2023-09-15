@@ -21,23 +21,18 @@ class BoatsController < ApplicationController
 
   # POST /boats or /boats.json
   def create
-    @boat = Boat.new(boat_params)
-
-    respond_to do |format|
-      if @boat.save
-        format.html { redirect_to boat_url(@boat), notice: "Boat was successfully created." }
-        format.json { render :show, status: :created, location: @boat }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @boat.errors, status: :unprocessable_entity }
-      end
-    end
+    @boat = Boat.create(
+      name: params[:name],
+      size: params[:size],
+      captain: params[:captain],
+    )
+    render :show
   end
 
   # PATCH/PUT /boats/1 or /boats/1.json
   def update
     respond_to do |format|
-      if @boat.update(boat_params)
+      if @boat.update
         format.html { redirect_to boat_url(@boat), notice: "Boat was successfully updated." }
         format.json { render :show, status: :ok, location: @boat }
       else
@@ -63,8 +58,5 @@ class BoatsController < ApplicationController
       @boat = Boat.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def boat_params
-      params.require(:boat).permit(:name, :size, :captain)
-    end
+
 end
