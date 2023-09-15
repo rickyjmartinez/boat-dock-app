@@ -1,0 +1,32 @@
+<%= form_with(model: boat) do |form| %>
+  <% if boat.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(boat.errors.count, "error") %> prohibited this boat from being saved:</h2>
+
+      <ul>
+        <% boat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :size, style: "display: block" %>
+    <%= form.text_field :size %>
+  </div>
+
+  <div>
+    <%= form.label :captain, style: "display: block" %>
+    <%= form.text_field :captain %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
